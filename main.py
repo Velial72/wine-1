@@ -1,8 +1,8 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import pandas as pd
-from pprint import pprint
 import found_age
+from collections import defaultdict
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -11,13 +11,19 @@ env = Environment(
 
 template = env.get_template('template.html')
 
-exel_data_df = pd.read_excel('wine2.xlsx')
-types_of_wine = exel_data_df.to_dict(orient="records")
-pprint(types_of_wine)
+
+def get_wine_catalog():
+    exel_data_df = pd.read_excel('wine.xlsx')
+    types_of_wine = exel_data_df.to_dict(orient="records")
+    grouped_wine_cards = defaultdict(list)
+    for wine in types_of_wine:
+        grouped_wine_cards[wine['Категория']].append(wine)
+    return grouped_wine_cards
+
 
 rendered_page = template.render(
     age_of_winery=found_age.age_winery(),
-    types_of_wine=types_of_wine
+    types_of_wine=get_wine_catalog()
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
