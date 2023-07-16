@@ -113,20 +113,31 @@
             </p>
           </div>
         </div>
-        <div class="row">
-          {% for wine in types_of_wine %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
-                <p>
-                  Сорт винограда - {{wine.Сорт}}<br/>
-                  <span class="price">{{wine.Цена}}</span>
-                </p>
-              </div>
+          {% for category, wines in types_of_wine.items() %}
+            <div class="col-12 section-title text-center mb-5">
+              <h2 class="d-block">{{category}}</h2>
             </div>
-          </div>
+            <div class="row">
+              {% for wine in wines %}
+                <div class="col-lg-4 mb-5 col-md-6">
+                  <div class="wine_v_1 text-center pb-4 pt-5">
+                    <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
+                    {% if wine.Акция %}
+                      <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                    {% endif %}
+                    <div>
+                      <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
+                      {% if wine.Сорт %}
+                        <p>
+                          Сорт винограда - {{wine.Сорт}}<br/>
+                        </p>
+                      {% endif %}
+                        <span class="price">{{wine.Цена}}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
           {% endfor %}
         </div>
       </div>
@@ -177,8 +188,7 @@
     
     <div class="footer">
       <div><a id="footer"></a></div>
-      <div class="container">
-        
+      <div class="container">    
         <div class="row">
           <div class="col-12 text-center">
             <div class="social-icons">
@@ -196,10 +206,7 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-
-
-
+                </p>
             </div>
           </div>
         </div>
