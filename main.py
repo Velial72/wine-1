@@ -22,7 +22,7 @@ def get_wine_catalog():
 
 
 rendered_page = template.render(
-    winery_age=found_age.age_winery(),
+    winery_age=found_age.get_age_winery(),
     types_of_wine=get_wine_catalog()
 )
 
