@@ -5,11 +5,11 @@ current_year = datetime.datetime.now()
 age_of_winery = str(current_year.year - 1920)
 
 
-def age_winery():
-    if age_of_winery[-1] == '1':
-        age = f'{age_of_winery} год'
-    elif age_of_winery[-1] in '234':
-        age = f'{age_of_winery} года'
+def get_winery_age():
+    if winery_age[-1] == '1':
+        age = f'{winery_age} год'
+    elif winery_age[-1] in '234':
+        age = f'{winery_age} года'
     else:
-        age = f'{age_of_winery} лет'
+        age = f'{winery_age} лет'
     return age
