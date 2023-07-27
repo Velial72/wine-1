@@ -1,8 +1,8 @@
 import datetime
 
 
-current_year = datetime.datetime.now()
-winery_age = str(current_year.year - 1920)
+current_date = datetime.datetime.now()
+winery_age = str(current_date.year - 1920)
 
 
 def get_winery_age():
