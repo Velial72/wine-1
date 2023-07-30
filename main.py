@@ -6,7 +6,15 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from collections import defaultdict
 
-import found_age
+
+def get_winery_age(winery_age):
+    if winery_age[-1] == '1':
+        age = f'{winery_age} год'
+    elif winery_age[-1] in '234':
+        age = f'{winery_age} года'
+    else:
+        age = f'{winery_age} лет'
+    return age
 
 def get_wine_catalog(wine_cards_filepath):
     excel_data_df = pd.read_excel(wine_cards_filepath, sheet_name='Лист1', na_values='nan', keep_default_na=False)
@@ -28,7 +36,7 @@ def get_dir_path():
 if __name__ == '__main__':
     current_date = datetime.datetime.now()
     winery_age = str(current_date.year - 1920)
-    correct_winery_age = found_age.get_winery_age(winery_age),
+    correct_winery_age = get_winery_age(winery_age),
     wines_catalog = get_wine_catalog(get_dir_path())
     env = Environment(
         loader=FileSystemLoader('.'),
