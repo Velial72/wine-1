@@ -34,8 +34,9 @@ def get_dir_path():
     
 
 if __name__ == '__main__':
+    year_of_foundation = 1920
     current_date = datetime.datetime.now()
-    winery_age = str(current_date.year - 1920)
+    winery_age = str(current_date.year - year_of_foundation)
     correct_winery_age = get_winery_age(winery_age),
     wines_catalog = get_wine_catalog(get_dir_path())
     env = Environment(
